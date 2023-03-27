@@ -2,6 +2,7 @@ import os
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from detectron2.structures import BoxMode
+from detectron2.data import DatasetCatalog, MetadataCatalog
 
 
 def load_train_test(data_path, val_size):
@@ -49,3 +50,32 @@ def create_dataset_dict(filenames, bboxes, data_path, is_test=False):
         else:
             dataset_dicts.append({"file_name": img_path})
     return dataset_dicts
+
+
+def register_datasets(data_path, val_size=.16):
+    bboxes = pd.read_csv(os.path.join(data_path, "train/bbox_train.csv"), delimiter=",")
+    train_names, val_names, test_names = load_train_test(data_path, val_size)
+
+    for d in ["train", "val", "test"]:
+        if d == "test":
+            DatasetCatalog.register(
+                "faces_test",
+                lambda:
+                create_dataset_dict(
+                    test_names,
+                    bboxes,
+                    data_path,
+                    is_test=True
+                )
+            )
+        else:
+            DatasetCatalog.register(
+                "faces_" + d,
+                lambda d=d:
+                create_dataset_dict(
+                    train_names if d == "train" else val_names,
+                    bboxes,
+                    data_path
+                )
+            )
+        MetadataCatalog.get("faces_" + d).set(thing_classes=["face"])
