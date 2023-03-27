@@ -58,3 +58,17 @@ class SimpleVisualizer:
                 ax[idx // 2, idx % 2].imshow(result)
 
         plt.show()
+
+    def save_predict(self, img_path, save_path, threshold=.85):
+        self.cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST = threshold
+        predictor = DefaultPredictor(self.cfg)
+
+        img = plt.imread(img_path)
+        pred = predictor(img[..., ::-1])
+        instances = pred["instances"].to("cpu")
+
+        img_meta = Metadata()
+        img_meta.set(thing_classes=["face"])
+
+        result = self._apply_visualizer(img, instances, img_meta, is_gt=False)
+        plt.imsave(save_path, result)
