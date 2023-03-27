@@ -38,7 +38,7 @@ The obtained metrics are shown in the table below:
 |:------:|:------:|:------:|:------:|:------:|:------:|
 | 46.698 | 95.582 | 34.417 | 38.448 | 47.637 | 48.467 |
 
-The attained weights can be downloaded [here.](https://drive.google.com/file/d/1kgNhdHzCHEA2Ba65iT711BhZoDAOfnL3/view?usp=share_link)
+The attained weights can be downloaded [here.](https://drive.google.com/file/d/1OQdvq0QsRNRdNhmMpPklBj0bPBqhBdrj/view?usp=share_link)
 
 ## Visualization
 <p align="center">
