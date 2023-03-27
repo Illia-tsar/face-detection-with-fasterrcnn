@@ -31,6 +31,12 @@ data_group.add_argument(
     default=0.16,
     help="fraction used for splitting data into train and val(default: %(default)s)"
 )
+data_group.add_argument(
+    "--weights_path",
+    type=str,
+    default="",
+    help="path to model weights; if unspecified - use the pretrained imagenet weights"
+)
 
 model_group = parser.add_argument_group("model parameters")
 model_group.add_argument(

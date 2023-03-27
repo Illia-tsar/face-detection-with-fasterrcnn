@@ -40,6 +40,7 @@ def gen_cfg(config=None):
         cfg.MODEL.BACKBONE.FREEZE_AT = config.freeze_at
         cfg.MODEL.ROI_HEADS.NUM_CLASSES = 1
         cfg.MODEL.ROI_HEADS.BATCH_SIZE_PER_IMAGE = config.roi_batch_size
+        cfg.MODEL.WEIGHTS = cfg.MODEL.WEIGHTS if not config.weights_path else config.weights_path
 
         cfg.SOLVER.IMS_PER_BATCH = config.batch_size
         cfg.SOLVER.MAX_ITER = config.max_iter
