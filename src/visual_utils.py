@@ -11,14 +11,15 @@ from detectron2.engine import DefaultPredictor
 class SimpleVisualizer:
     def __init__(
         self,
-        data_path,
-        weights_path="",
+        data_path=None,
+        weights_path=None,
         val_size=.16
     ):
         self.cfg = gen_cfg()
-        self.cfg.MODEL.WEIGHTS = self.cfg.MODEL.WEIGHTS if not weights_path else weights_path
+        self.cfg.MODEL.WEIGHTS = self.cfg.MODEL.WEIGHTS if weights_path is None else weights_path
 
-        register_datasets(data_path, val_size=val_size)
+        if data_path is not None:
+            register_datasets(data_path, val_size=val_size)
 
     def _apply_visualizer(self, img, instances, metadata, is_gt=False):
         visualizer = Visualizer(
