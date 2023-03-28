@@ -9,16 +9,15 @@ def gen_cfg(config=None):
             "COCO-Detection/faster_rcnn_R_50_FPN_3x.yaml"
         )
     )
+    cfg.DATASETS.TRAIN = ("faces_train",)
+    cfg.DATASETS.TEST = ("faces_val",)
+    cfg.MODEL.ROI_HEADS.NUM_CLASSES = 1
 
     if config is None:
         # if config is None, set the default values
         cfg.DATALOADER.NUM_WORKERS = 2
 
-        cfg.DATASETS.TRAIN = ("faces_train",)
-        cfg.DATASETS.TEST = ("faces_val",)
-
         cfg.MODEL.BACKBONE.FREEZE_AT = 2
-        cfg.MODEL.ROI_HEADS.NUM_CLASSES = 1
         cfg.MODEL.ROI_HEADS.BATCH_SIZE_PER_IMAGE = 512
 
         cfg.SOLVER.IMS_PER_BATCH = 8
@@ -34,11 +33,7 @@ def gen_cfg(config=None):
     else:
         cfg.DATALOADER.NUM_WORKERS = config.num_workers
 
-        cfg.DATASETS.TRAIN = ("faces_train",)
-        cfg.DATASETS.TEST = ("faces_val",)
-
         cfg.MODEL.BACKBONE.FREEZE_AT = config.freeze_at
-        cfg.MODEL.ROI_HEADS.NUM_CLASSES = 1
         cfg.MODEL.ROI_HEADS.BATCH_SIZE_PER_IMAGE = config.roi_batch_size
         cfg.MODEL.WEIGHTS = cfg.MODEL.WEIGHTS if not config.weights_path else config.weights_path
 
