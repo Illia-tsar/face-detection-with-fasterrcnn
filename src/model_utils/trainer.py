@@ -6,7 +6,6 @@ from detectron2.data import DatasetMapper, build_detection_test_loader
 from model_utils.hooks import LossEvalHook
 from detectron2.engine.hooks import LRScheduler
 from torch.optim.lr_scheduler import CyclicLR
-from detectron2.solver.lr_scheduler import WarmupParamScheduler
 
 
 class RCNNTrainer(DefaultTrainer):
@@ -39,17 +38,11 @@ class RCNNTrainer(DefaultTrainer):
             1,
             LRScheduler(
                 optimizer=self.optimizer,
-                scheduler=WarmupParamScheduler(
-                    CyclicLR(
-                        self.optimizer,
-                        base_lr=0.002,
-                        max_lr=0.02,
-                        step_size_up=1184
-                    ),
-                    warmup_factor=self.cfg.SOLVER.WARMUP_FACTOR,
-                    warmup_length=0.066,
-                    warmup_method=self.cfg.SOLVER.WARMUP_METHOD,
-                    rescale_interval=self.cfg.SOLVER.RESCALE_INTERVAL
+                scheduler=CyclicLR(
+                    self.optimizer,
+                    base_lr=0.002,
+                    max_lr=0.02,
+                    step_size_up=1184
                 )
             )
         )
