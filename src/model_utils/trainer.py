@@ -1,8 +1,11 @@
 import os
+import pprint
 from detectron2.engine import DefaultTrainer
 from detectron2.evaluation import COCOEvaluator
 from detectron2.data import DatasetMapper, build_detection_test_loader
 from model_utils.hooks import LossEvalHook
+from detectron2.engine.hooks import LRScheduler
+from torch.optim.lr_scheduler import CyclicLR
 
 
 class RCNNTrainer(DefaultTrainer):
@@ -30,5 +33,19 @@ class RCNNTrainer(DefaultTrainer):
                 )
             )
         )
+        del hooks[1]
+        hooks.insert(
+            1,
+            LRScheduler(
+                optimizer=self.optimizer,
+                scheduler=CyclicLR(
+                    self.optimizer,
+                    base_lr=0.002,
+                    max_lr=0.02,
+                    step_size_up=1184
+                )
+            )
+        )
+        pprint.pprint(hooks)
 
         return hooks
