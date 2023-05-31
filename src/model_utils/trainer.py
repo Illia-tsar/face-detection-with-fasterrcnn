@@ -33,20 +33,19 @@ class RCNNTrainer(DefaultTrainer):
                 )
             )
         )
-        # hooks.pop(1)
-        # hooks.insert(
-        #     1,
-        #     LRScheduler(
-        #         optimizer=self.optimizer,
-        #         scheduler=CyclicLR(
-        #             self.optimizer,
-        #             base_lr=1e-10,
-        #             max_lr=1e-1,
-        #             step_size_up=1776,
-        #             verbose=True
-        #         )
-        #     )
-        # )
+        hooks.pop(1)
+        hooks.insert(
+            1,
+            LRScheduler(
+                optimizer=self.optimizer,
+                scheduler=CyclicLR(
+                    self.optimizer,
+                    base_lr=1e-7,
+                    max_lr=0.000415512543545,
+                    step_size_up=2368
+                )
+            )
+        )
         hooks.pop()
         hooks.append(
             PeriodicWriter(self.build_writers(), period=1)
