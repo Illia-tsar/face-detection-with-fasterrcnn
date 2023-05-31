@@ -41,8 +41,9 @@ class RCNNTrainer(DefaultTrainer):
                 scheduler=CyclicLR(
                     self.optimizer,
                     base_lr=1e-10,
-                    max_lr=1e+1,
-                    step_size_up=1776
+                    max_lr=0,
+                    step_size_up=1776,
+                    verbose=True
                 )
             )
         )
