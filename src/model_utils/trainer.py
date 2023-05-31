@@ -33,19 +33,19 @@ class RCNNTrainer(DefaultTrainer):
                 )
             )
         )
-        del hooks[1]
-        hooks.insert(
-            1,
-            LRScheduler(
-                optimizer=self.optimizer,
-                scheduler=CyclicLR(
-                    self.optimizer,
-                    base_lr=0.002,
-                    max_lr=0.02,
-                    step_size_up=1184
-                )
-            )
-        )
-        pprint.pprint(hooks)
+        # del hooks[1]
+        # hooks.insert(
+        #     1,
+        #     LRScheduler(
+        #         optimizer=self.optimizer,
+        #         scheduler=CyclicLR(
+        #             self.optimizer,
+        #             base_lr=0.002,
+        #             max_lr=0.02,
+        #             step_size_up=1184
+        #         )
+        #     )
+        # )
+        # pprint.pprint(hooks)
 
         return hooks

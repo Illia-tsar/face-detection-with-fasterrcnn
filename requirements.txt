@@ -4,4 +4,4 @@ torch
 torchvision
 scikit-learn
 matplotlib
-pyqt5==5.13.2
+# pyqt5==5.13.2
