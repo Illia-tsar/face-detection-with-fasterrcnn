@@ -11,6 +11,7 @@ def gen_cfg(config=None):
     )
     cfg.DATASETS.TRAIN = ("faces_train",)
     cfg.DATASETS.TEST = ("faces_val",)
+    cfg.MODEL.WEIGHTS = model_zoo.get_checkpoint_url("COCO-Detection/faster_rcnn_R_50_FPN_3x.yaml")
     cfg.MODEL.ROI_HEADS.NUM_CLASSES = 1
 
     if config is None:
