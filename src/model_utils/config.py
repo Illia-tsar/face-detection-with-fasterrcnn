@@ -48,4 +48,7 @@ def gen_cfg(config=None):
 
         cfg.TEST.EVAL_PERIOD = config.eval_period
 
+        cfg.SOLVER.NUM_DECAYS = 2960
+        cfg.SOLVER.LR_SCHEDULER_NAME = "WarmupStepWithFixedGammaLR"
+
     return cfg
