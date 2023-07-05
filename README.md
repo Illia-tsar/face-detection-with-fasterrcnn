@@ -28,11 +28,7 @@ pip install 'git+https://github.com/facebookresearch/detectron2.git'
 * Dataset: [Count the number of Faces present in an Image](https://www.kaggle.com/datasets/vin1234/count-the-number-of-faces-present-in-an-image?select=test.csv)
 * Library: [detectron2](https://detectron2.readthedocs.io/en/latest/)
 
-The mentioned dataset was used in conjunction with detectron2 in order to fine-tune *FasterRCNN*. The weights pretrained 
-on ImageNet were used as a starting point. During this process, the first 2 stages of model's backbone were frozen. 
-The *FasterRCNN* model was trained for 12000 iterations, having 1200 iterations reserved for warmup, increasing the 
-learning rate linearly up to 0.0005. At iterations 3000 and 8000 learning rate was decreased by a factor of 0.1. 
-The obtained metrics are shown in the table below:
+The mentioned dataset was used in conjunction with detectron2 in order to fine-tune *FasterRCNN*. The obtained metrics are shown in the table below:
 
 |   AP   |  AP50  |  AP75  |  APs   |  APm   |  APl   |
 |:------:|:------:|:------:|:------:|:------:|:------:|
